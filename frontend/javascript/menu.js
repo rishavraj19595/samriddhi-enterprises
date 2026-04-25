@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://localhost:3000' 
-        : 'https://your-backend.onrender.com';
+        : 'https://samriddhi-backend-zavs.onrender.com';
 
     // Profile Dropdown Elements
     const profileDropdown = document.getElementById('profileDropdown');

@@ -13,7 +13,7 @@ loginButton.addEventListener('click', () => {
 // API Integration
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:3000' 
-    : 'https://your-backend.onrender.com'; // <--- REPLACE THIS with your actual Render URL later
+    : 'https://samriddhi-backend-zavs.onrender.com'; // <--- REPLACE THIS with your actual Render URL later
 
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
