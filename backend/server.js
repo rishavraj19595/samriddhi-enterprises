@@ -57,16 +57,23 @@ pages.forEach(page => {
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) {
-    console.warn("WARNING: MONGODB_URI not found in environment variables. Falling back to local MongoDB.");
-}
 
-mongoose.connect(MONGODB_URI || 'mongodb://127.0.0.1:27017/vendorDB')
-    .then(() => console.log('✅ Connected to MongoDB'))
-    .catch(err => {
+const connectDB = async () => {
+    try {
+        const uri = MONGODB_URI || 'mongodb://127.0.0.1:27017/vendorDB';
+        console.log(`📡 Attempting to connect to MongoDB: ${uri.split('@').pop()}`); // Log simplified URI
+        await mongoose.connect(uri);
+        console.log('✅ Connected to MongoDB');
+    } catch (err) {
         console.error('❌ MongoDB connection error:', err.message);
+        if (!MONGODB_URI) {
+            console.error('PRO TIP: No MONGODB_URI found. If this is deployed (Render/Heroku), you MUST set this environment variable to your Atlas connection string.');
+        }
         console.error('PRO TIP: If using MongoDB Atlas, make sure you whitelisted Render\'s IP or set it to 0.0.0.0/0');
-    });
+    }
+};
+
+connectDB();
 
 // Models
 const UserSchema = new mongoose.Schema({
@@ -121,6 +128,17 @@ const verifyToken = (req, res, next) => {
 app.post('/api/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
+        
+        // Basic Validation
+        if (!username || !email || !password) {
+            return res.status(400).json({ error: 'Missing required fields (username, email, or password)' });
+        }
+
+        // Check DB state
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: 'Database not connected. Please check your MONGODB_URI and IP whitelist.' });
+        }
+
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ error: 'Email already in use' });
 
@@ -129,14 +147,24 @@ app.post('/api/register', async (req, res) => {
         await newUser.save();
         res.json({ success: true, message: 'User registered successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        console.error('REGISTRATION ERROR:', error);
+        res.status(500).json({ error: `Server error: ${error.message}` });
     }
 });
 
 // Login
 app.post('/api/login', async (req, res) => {
     try {
-        const { username, password } = req.body; // HTML has only Username and Password
+        const { username, password } = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password required' });
+        }
+
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(503).json({ error: 'Database not connected' });
+        }
+
         const user = await User.findOne({ username });
         if (!user) return res.status(400).json({ error: 'Invalid credentials' });
 
@@ -146,7 +174,8 @@ app.post('/api/login', async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret123', { expiresIn: '1h' });
         res.json({ success: true, token, username: user.username });
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        console.error('LOGIN ERROR:', error);
+        res.status(500).json({ error: `Server error: ${error.message}` });
     }
 });
 
