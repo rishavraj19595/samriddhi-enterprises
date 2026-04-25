@@ -69,7 +69,7 @@ loginForm.addEventListener('submit', async (e) => {
             sessionStorage.setItem('token', data.token);
             sessionStorage.setItem('username', data.username);
             setTimeout(() => {
-                window.location.href = 'index.html'; // Redirect
+                window.location.href = '/'; // Redirect
             }, 1000);
         } else {
             loginMsg.style.color = 'red';

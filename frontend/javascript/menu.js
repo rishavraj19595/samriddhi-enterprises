@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logoutBtn.addEventListener('click', () => {
                 sessionStorage.removeItem('token');
                 sessionStorage.removeItem('username');
-                window.location.href = 'index.html';
+                window.location.href = '/';
             });
         }
 
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (authLink) {
             authLink.style.display = 'block';
             authLink.textContent = 'Login';
-            authLink.href = 'login.html';
+            authLink.href = '/login';
         }
         if (profileDropdown) profileDropdown.style.display = 'none';
     }

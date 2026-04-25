@@ -22,9 +22,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Root route for health checks (Required for Render)
+// Serve static files from the frontend directory
+app.use(express.static(path.join(__dirname, '..', 'frontend')));
+
+// Root route - serve index.html
 app.get('/', (req, res) => {
-    res.send('Samriddhi Enterprises Backend is Running!');
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+});
+
+// Auth routes
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'login.html'));
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'login.html'));
+});
+
+// Other pages
+const pages = ['about', 'service', 'products', 'feedback', 'appointment', 'contact'];
+pages.forEach(page => {
+    app.get(`/${page}`, (req, res) => {
+        res.sendFile(path.join(__dirname, '..', 'frontend', `${page}.html`));
+    });
 });
 
 // MongoDB Connection
