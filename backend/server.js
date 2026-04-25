@@ -22,36 +22,51 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Helper to serve frontend files if they exist
+const serveFile = (res, fileName) => {
+    const filePath = path.join(__dirname, '..', 'frontend', fileName);
+    try {
+        res.sendFile(filePath);
+    } catch (err) {
+        res.status(404).send("Front-end file not found. Please use the Netlify link for the UI.");
+    }
+};
+
 // Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
-// Root route - serve index.html
+// Root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+    const rootPath = path.join(__dirname, '..', 'frontend', 'index.html');
+    if (require('fs').existsSync(rootPath)) {
+        res.sendFile(rootPath);
+    } else {
+        res.send('Samriddhi Enterprises Backend is Running! (API Ready)');
+    }
 });
 
 // Auth routes
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'login.html'));
-});
-
-app.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'login.html'));
-});
+app.get('/login', (req, res) => serveFile(res, 'login.html'));
+app.get('/signup', (req, res) => serveFile(res, 'login.html'));
 
 // Other pages
 const pages = ['about', 'service', 'products', 'feedback', 'appointment', 'contact'];
 pages.forEach(page => {
-    app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'frontend', `${page}.html`));
-    });
+    app.get(`/${page}`, (req, res) => serveFile(res, `${page}.html`));
 });
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/vendorDB';
-mongoose.connect(MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('MongoDB connection error:', err));
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+    console.warn("WARNING: MONGODB_URI not found in environment variables. Falling back to local MongoDB.");
+}
+
+mongoose.connect(MONGODB_URI || 'mongodb://127.0.0.1:27017/vendorDB')
+    .then(() => console.log('✅ Connected to MongoDB'))
+    .catch(err => {
+        console.error('❌ MongoDB connection error:', err.message);
+        console.error('PRO TIP: If using MongoDB Atlas, make sure you whitelisted Render\'s IP or set it to 0.0.0.0/0');
+    });
 
 // Models
 const UserSchema = new mongoose.Schema({
