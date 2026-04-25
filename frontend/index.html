@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddhi Enterprises | Digital Banking Solutions</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="/Images/logo.png" alt="Samriddhi Logo">
+                <div class="logo-text">Samriddhi<span>Enterprises</span></div>
+            </div>
+            <div class="header-right">
+                <nav class="navbar">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="service.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="appointment.html">Appointment</a>
+                    <a href="about.html">About</a>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-icon" id="profileIcon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" id="openSettings">
+                                <i class="fas fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" id="authLink" class="btn btn-primary btn-sm">Login</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div id="heroGreeting" class="hero-greeting"></div>
+            <h1>Empowering Your <span class="text-gradient">Financial Future</span></h1>
+            <p>Your Trusted Partner for Digital Banking, AEPS, and Secure Financial Solutions. Experience the future of banking today.</p>
+            <div class="hero-btns">
+                <a href="#explore" class="btn btn-primary">Explore Services</a>
+                <a href="appointment.html" class="btn btn-outline">Book Appointment</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <!-- Optional: Add a 3D-like element or illustration here -->
+        </div>
+    </section>
+
+    <!-- Owner & Shop Info -->
+    <section class="section-container">
+        <div class="grid-2">
+            <!-- Owner Card -->
+            <div class="glass-card owner-card">
+                <img class="owner-img" src="/Images/20lb.jpg" alt="Mr. Satyendra Kumar">
+                <h3 class="card-title" style="justify-content: center;">Mr. Satyendra Kumar</h3>
+                <p class="card-content">Founder</p>
+                <div class="mt-2 text-gradient" style="font-weight: 700;">Visionary Leader</div>
+            </div>
+
+            <!-- Shop Details -->
+            <div class="glass-card">
+                <h3 class="card-title"><i class="fas fa-store text-gradient"></i> Business Details</h3>
+                <ul class="card-content" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <li><strong>GST Reg Date:</strong> 01-07-2017</li>
+                    <li><strong>Status:</strong> Proprietorship Firm</li>
+                    <li><strong>Annual Turnover:</strong> 40L - 1.5Cr</li>
+                    <li><strong>Location:</strong> Muzaffarpur, Bihar</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="section-container">
+        <div class="glass-card">
+            <h3 class="card-title"><i class="fas fa-eye text-gradient"></i> Our Vision</h3>
+            <p class="card-content" style="font-size: 1.1rem; line-height: 1.8;">
+                At Samridhi Enterprises, "A"t Samridhi Enterprises, our vision is to create a financially inclusive
+                community.
+                We aim to bridge the gap between traditional banking and the underserved by delivering secure,
+                convenient,
+                and customer-friendly solutions directly to our clients. We empower individuals to manage their finances
+                independently and confidently.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="section-container">
+        <div class="glass-card" style="border: none; background: transparent; backdrop-filter: none; padding: 0;">
+            <h2 style="font-family: var(--font-heading); font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">
+                Our Key Services</h2>
+            <div class="grid-2" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="glass-card">
+                    <h3 class="card-title">AEPS Transactions</h3>
+                    <p class="card-content">Aadhaar Enabled Payment System for secure cash withdrawals and balance
+                        checks using just your fingerprint.</p>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Credit Card Cash</h3>
+                    <p class="card-content">Instant cash withdrawals from your credit card limit, providing liquidity
+                        when you need it most.</p>
+                </div>
+                <div class="glass-card">
+                    <h3 class="card-title">Biometric Security</h3>
+                    <p class="card-content">Advanced fingerprint-based verification ensures your transactions are safe,
+                        card-less, and PIN-less.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Section -->
+    <section id="explore" class="section-container">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">
+            Explore More</h2>
+        <div class="grid-2" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="glass-card" style="text-align: center;">
+                <h3 class="card-title" style="justify-content: center;">Services</h3>
+                <p class="card-content mb-2">Detailed banking solutions.</p>
+                <a href="service.html" class="btn btn-outline">View Services</a>
+            </div>
+            <div class="glass-card" style="text-align: center;">
+                <h3 class="card-title" style="justify-content: center;">Products</h3>
+                <p class="card-content mb-2">Our financial products.</p>
+                <a href="products.html" class="btn btn-outline">By Products</a>
+            </div>
+            <div class="glass-card" style="text-align: center;">
+                <h3 class="card-title" style="justify-content: center;">About Us</h3>
+                <p class="card-content mb-2">Our story and mission.</p>
+                <a href="about.html" class="btn btn-outline">Read More</a>
+            </div>
+            <div class="glass-card" style="text-align: center;">
+                <h3 class="card-title" style="justify-content: center;">Feedback</h3>
+                <p class="card-content mb-2">We value your opinion.</p>
+                <a href="feedback.html" class="btn btn-outline">Give Feedback</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+919386111191"><i class="fas fa-phone"></i> +91 9386111191</a>
+                <a href="mailto:Satya.mzp@gmail.com"><i class="fas fa-envelope"></i> Satya.mzp@gmail.com</a>
+                <p style="color: var(--text-muted); margin-top: 10px;">
+                    H.No - 09, Prakash Path,<br>
+                    Ahiyapur Bhikhanpur,<br>
+                    Muzaffarpur, Bihar, 842004
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Samriddhi Enterprises | All Rights Reserved
+        </div>
+    </footer>
+
+    <!-- Profile Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSettings">&times;</span>
+            <h2 class="card-title">Profile Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="settingsUsername">Full Name</label>
+                    <input type="text" id="settingsUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="settingsDOB">Date of Birth</label>
+                    <input type="date" id="settingsDOB">
+                </div>
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--glass-border);">
+                <h3 class="card-title" style="font-size: 1.1rem;">Change Password</h3>
+                <div class="form-group">
+                    <label for="settingsOldPassword">Current Password</label>
+                    <input type="password" id="settingsOldPassword" placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="settingsNewPassword">New Password</label>
+                    <input type="password" id="settingsNewPassword" placeholder="Enter new password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="javascript/menu.js"></script>
+</body>
+
+</html>
+
+

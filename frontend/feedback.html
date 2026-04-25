@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddhi Enterprises | Feedback</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Form specific styles overrides */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+        }
+
+        option {
+            background-color: var(--secondary-bg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="/Images/logo.png" alt="Samriddhi Logo">
+                <div class="logo-text">Samriddhi<span>Enterprises</span></div>
+            </div>
+            <div class="header-right">
+                <nav class="navbar">
+                    <a href="index.html">Home</a>
+                    <a href="service.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="feedback.html" class="active">Feedback</a>
+                    <a href="appointment.html">Appointment</a>
+                    <a href="about.html">About</a>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-icon" id="profileIcon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" id="openSettings">
+                                <i class="fas fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" id="authLink" class="btn btn-primary btn-sm">Login</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="section-container" style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="text-gradient" style="font-family: var(--font-heading); font-size: 3.5rem;">Your Feedback</h1>
+        <p class="text-muted" style="font-size: 1.1rem; max-width: 500px; margin: 1rem auto 0;">Your opinion helps us evolve. Share your experience with Samriddhi Enterprises.</p>
+    </section>
+
+    <!-- Feedback Form -->
+    <section class="section-container">
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+            <h2 class="card-title"
+                style="margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+                Feedback Form</h2>
+
+            <!-- Custom Node.js Backend Form -->
+            <form id="feedbackForm">
+
+                <div class="form-group">
+                    <label for="name">Full Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span style="color: #ef4444;">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Service Used</label>
+                    <select id="service" name="service">
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="AEPS (Aadhaar Enabled Payment System)">AEPS (Aadhaar Enabled Payment System)
+                        </option>
+                        <option value="Credit Card Cash Withdrawal">Credit Card Cash Withdrawal</option>
+                        <option value="Fingerprint Cash Withdrawal">Fingerprint Cash Withdrawal</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select id="rating" name="rating" required>
+                        <option value="5 - Excellent">Excellent</option>
+                        <option value="4 - Very Good">Very Good</option>
+                        <option value="3 - Good">Good</option>
+                        <option value="2 - Fair">Fair</option>
+                        <option value="1 - Poor">Poor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Additional Comments</label>
+                    <textarea id="comments" name="comments" rows="5" placeholder="Share your experience..."></textarea>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+919386111191"><i class="fas fa-phone"></i> +91 9386111191</a>
+                <a href="mailto:Satya.mzp@gmail.com"><i class="fas fa-envelope"></i> Satya.mzp@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Samridhi Enterprises | All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:3000' 
+            : 'https://your-backend.onrender.com'; // <--- REPLACE THIS with your actual Render URL later
+
+        const form = document.getElementById('feedbackForm');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent default submission
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // 1. Client-Side Validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const comments = document.getElementById('comments').value.trim();
+
+            // Simple email regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!name || !email || !subject) {
+                Swal.fire({ icon: 'error', title: 'Missing Fields', text: 'Please fill in all required fields.' });
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                Swal.fire({ icon: 'error', title: 'Invalid Email', text: 'Please enter a valid email address.' });
+                return;
+            }
+
+            if (comments && comments.length < 10) {
+                Swal.fire({ icon: 'warning', title: 'Too Short', text: 'Please enter at least 10 characters for your message.' });
+                return;
+            }
+
+            // 2. Prepare Data
+            const formData = {
+                name: name,
+                email: email,
+                subject: subject,
+                message: comments,
+                service: document.getElementById('service').value,
+                rating: document.getElementById('rating').value
+            };
+
+            // 3. Show Loading
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                // 4. Send to Node.js Backend
+                const response = await fetch(`${API_BASE_URL}/send-feedback`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    Swal.fire({
+                        title: 'Thank You!',
+                        text: 'Your feedback has been sent successfully.',
+                        icon: 'success',
+                        background: '#1e293b',
+                        color: '#f1f5f9',
+                        confirmButtonColor: '#38bdf8'
+                    });
+                    form.reset();
+                } else {
+                    throw new Error(result.error || 'Unknown error occurred');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message || 'Failed to connect to the server.',
+                    icon: 'error',
+                    background: '#1e293b',
+                    color: '#f1f5f9',
+                    confirmButtonColor: '#ef4444'
+                });
+            } finally {
+                // Reset Button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+    <!-- Profile Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSettings">&times;</span>
+            <h2 class="card-title">Profile Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="settingsUsername">Full Name</label>
+                    <input type="text" id="settingsUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="settingsDOB">Date of Birth</label>
+                    <input type="date" id="settingsDOB">
+                </div>
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--glass-border);">
+                <h3 class="card-title" style="font-size: 1.1rem;">Change Password</h3>
+                <div class="form-group">
+                    <label for="settingsOldPassword">Current Password</label>
+                    <input type="password" id="settingsOldPassword" placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="settingsNewPassword">New Password</label>
+                    <input type="password" id="settingsNewPassword" placeholder="Enter new password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="javascript/menu.js"></script>
+</body>
+
+</html>

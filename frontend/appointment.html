@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddhi Enterprises | Book Appointment</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Flatpickr (Date Picker) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Razorpay SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        /* Specific Styles for Booking Page */
+        .glass-card {
+            max-width: 800px;
+        }
+
+        .slot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .time-slot {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .time-slot:hover {
+            background: rgba(14, 165, 233, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .time-slot.selected {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+        }
+
+        .time-slot.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: line-through;
+        }
+
+        .slot-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slot-grid::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 4px;
+        }
+
+        .fee-info {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* --- Monochrome Elite Form Styles --- */
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            background: #111111 !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 8px !important;
+            color: #FFFFFF !important;
+            outline: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #FFFFFF !important;
+            background: #1a1a1a !important;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fix for White Background on Autofill */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #FFFFFF !important;
+            -webkit-box-shadow: 0 0 0px 1000px #111111 inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+
+        option {
+            background: #000000;
+            color: #FFFFFF;
+        }
+
+        /* Time Slot Refinements */
+        .slot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .time-slot:hover {
+            background: #222222;
+            border-color: #FFFFFF;
+        }
+
+        .time-slot.selected {
+            background: #FFFFFF;
+            color: #000000;
+            border-color: #FFFFFF;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="/Images/logo.png" alt="Samriddhi Logo">
+                <div class="logo-text">Samriddhi<span>Enterprises</span></div>
+            </div>
+            <div class="header-right">
+                <nav class="navbar">
+                    <a href="index.html">Home</a>
+                    <a href="service.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="appointment.html" class="active">Appointment</a>
+                    <a href="about.html">About</a>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-icon" id="profileIcon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" id="openSettings">
+                                <i class="fas fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" id="authLink" class="btn btn-primary btn-sm">Login</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-container" style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="text-gradient" style="font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.1;">Secure Your <br>Appointment</h1>
+        <p class="text-muted" style="font-size: 1.1rem; max-width: 500px; margin: 1rem auto 0;">Save time by booking your slot online. Instant confirmation and secure payment.</p>
+    </section>
+
+    <section class="section-container">
+        <div class="glass-card">
+            <h2 class="card-title"
+                style="border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 2rem;">
+                Appointment Details
+            </h2>
+
+            <form id="appointmentForm" method="POST">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        <div class="form-group">
+                            <label for="name">Full Name <span style="color: #ef4444;">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number <span style="color: #ef4444;">*</span></label>
+                            <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile number"
+                                maxlength="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span style="color: #ef4444;">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="For booking confirmation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Select Service <span style="color: #ef4444;">*</span></label>
+                            <select id="service" name="service" required onchange="checkOtherService(this)">
+                                <option value="" disabled selected>Choose a service</option>
+                                <option value="AEPS Cash Withdrawal">AEPS Cash Withdrawal</option>
+                                <option value="Credit Card Cash Withdrawal">Credit Card Cash Withdrawal</option>
+                                <option value="Fingerprint Cash Withdrawal">Fingerprint Cash Withdrawal</option>
+                                <option value="Cyber Cafe / Online Forms">Cyber Cafe / Online Forms</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="otherServiceDiv" style="display: none;">
+                            <label for="otherService">Specify Service</label>
+                            <input type="text" id="otherService" name="otherService" placeholder="Please specify">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="date">Select Date <span style="color: #ef4444;">*</span></label>
+                            <input type="text" id="date" name="date" placeholder="Today or Future Date" required
+                                style="cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label>Available Time Slots <span style="color: #ef4444;">*</span></label>
+                            <p id="slot-msg" style="color: var(--text-muted); font-size: 0.9rem;">Select a date to view slots</p>
+                            <div id="slot-loading" style="display: none; text-align: center; padding: 20px;">
+                                <i class="fas fa-circle-notch fa-spin fa-2x" style="color: var(--accent-color);"></i>
+                            </div>
+                            <div class="slot-grid" id="slot-container"></div>
+                            <input type="hidden" id="selectedTimeSlot" name="selectedTimeSlot" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="fee-info">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--accent-color);">Booking Fee: ₹50.00</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">
+                        This fee is non-refundable and confirms your 10-minute slot. <br>
+                        Secure payment via Razorpay (UPI, Card, Netbanking).
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" id="payBtn" style="width: 100%; margin-top: 1.5rem;">
+                        Pay ₹50 & Confirm Appointment
+                    </button>
+                    <p id="testModeHint" style="display: none; font-size: 0.8rem; color: #0ea5e9; margin-top: 10px; text-align: center;">
+                        <i class="fas fa-info-circle"></i> <b>Test Mode Active:</b> Use Card <code>4111 1111 1111 1111</code> to test.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+919386111191"><i class="fas fa-phone"></i> +91 9386111191</a>
+                <a href="mailto:Satya.mzp@gmail.com"><i class="fas fa-envelope"></i> Satya.mzp@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Samridhi Enterprises | All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        function checkOtherService(select) {
+            const otherDiv = document.getElementById('otherServiceDiv');
+            if (select.value === 'Other') {
+                otherDiv.style.display = 'block';
+                document.getElementById('otherService').required = true;
+            } else {
+                otherDiv.style.display = 'none';
+                document.getElementById('otherService').required = false;
+            }
+        }
+
+        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:3000' 
+            : 'https://your-backend.onrender.com';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('date');
+            flatpickr("#date", {
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                disable: [function (date) { return (date.getDay() === 0); }],
+                onChange: function (selectedDates, dateStr) { fetchSlots(dateStr); }
+            });
+            if (dateInput && dateInput.value) fetchSlots(dateInput.value);
+        });
+
+        async function fetchSlots(dateStr) {
+            const container = document.getElementById('slot-container');
+            const msg = document.getElementById('slot-msg');
+            const loader = document.getElementById('slot-loading');
+            const hiddenInput = document.getElementById('selectedTimeSlot');
+            container.innerHTML = '';
+            hiddenInput.value = '';
+            msg.style.display = 'none';
+            loader.style.display = 'block';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/available-slots?date=${dateStr}`);
+                const data = await response.json();
+                loader.style.display = 'none';
+                if (data.slots && data.slots.length > 0) {
+                    data.slots.forEach(slot => {
+                        const div = document.createElement('div');
+                        div.className = 'time-slot';
+                        div.textContent = slot.label;
+                        div.dataset.storage = slot.label;
+                        div.onclick = function () {
+                            document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+                            this.classList.add('selected');
+                            hiddenInput.value = this.dataset.storage;
+                        };
+                        container.appendChild(div);
+                    });
+                } else {
+                    msg.textContent = 'No slots available for this date.';
+                    msg.style.display = 'block';
+                }
+            } catch (error) {
+                loader.style.display = 'none';
+                msg.textContent = 'Error loading slots.';
+                msg.style.display = 'block';
+            }
+        }
+
+        const form = document.getElementById('appointmentForm');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const timeSlot = document.getElementById('selectedTimeSlot').value;
+            let finalService = service === 'Other' ? "Other: " + document.getElementById('otherService').value : service;
+
+            if (mobile.length !== 10 || isNaN(mobile)) {
+                Swal.fire({ icon: 'error', title: 'Invalid Mobile', text: 'Please enter a valid 10-digit number.' });
+                return;
+            }
+            if (!timeSlot) {
+                Swal.fire({ icon: 'warning', title: 'Select Time', text: 'Please select a time slot.' });
+                return;
+            }
+
+            const payBtn = document.getElementById('payBtn');
+            const originalText = payBtn.innerHTML;
+            payBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
+            payBtn.disabled = true;
+
+            try {
+                const orderRes = await fetch(`${API_BASE_URL}/api/create-order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, mobile, email, service: finalService, date, timeSlot })
+                });
+                const orderData = await orderRes.json();
+                if (!orderRes.ok) throw new Error(orderData.error || 'Failed to create order');
+
+                if (orderData.key_id && orderData.key_id.startsWith('rzp_test')) {
+                    document.getElementById('testModeHint').style.display = 'block';
+                }
+
+                const options = {
+                    "key": orderData.key_id,
+                    "amount": orderData.amount,
+                    "currency": "INR",
+                    "name": "Samridhi Enterprises",
+                    "description": "Appointment Booking Fee",
+                    "order_id": orderData.order_id,
+                    "prefill": { "name": name, "email": email, "contact": mobile },
+                    "handler": async function (response) {
+                        payBtn.innerHTML = 'Verifying...';
+                        try {
+                            const verifyRes = await fetch(`${API_BASE_URL}/api/verify-payment`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_signature: response.razorpay_signature,
+                                    booking_id: orderData.booking_id
+                                })
+                            });
+                            const verifyData = await verifyRes.json();
+                            if (verifyData.success) {
+                                Swal.fire({
+                                    title: 'Appointment Confirmed! 🎉',
+                                    icon: 'success',
+                                    html: `<div style="text-align: left; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px;">
+                                        <p><strong>Booking ID:</strong> ${orderData.booking_id}</p>
+                                        <p><strong>Name:</strong> ${name}</p>
+                                        <p><strong>Service:</strong> ${finalService}</p>
+                                        <p><strong>Date:</strong> ${date}</p>
+                                        <p><strong>Time Slot:</strong> ${timeSlot}</p>
+                                        <p style="color: #10b981; font-weight: bold;">✅ Payment Successful</p>
+                                    </div>`,
+                                    confirmButtonText: 'Great!'
+                                }).then(() => window.location.reload());
+                            } else throw new Error(verifyData.error || 'Verification failed');
+                        } catch (err) {
+                            Swal.fire({ icon: 'error', title: 'Error', text: err.message });
+                        }
+                    },
+                    "modal": {
+                        "ondismiss": function () {
+                            payBtn.innerHTML = originalText;
+                            payBtn.disabled = false;
+                        }
+                    }
+                };
+                const rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response) {
+                    Swal.fire({ 
+                        icon: 'error', 
+                        title: 'Payment Failed ❌', 
+                        text: 'Your payment was not completed. Appointment not done. Please retry.',
+                        confirmButtonText: 'Retry'
+                    });
+                });
+                rzp1.open();
+            } catch (error) {
+                Swal.fire({ icon: 'error', title: 'Booking Failed', text: error.message });
+            } finally {
+                payBtn.innerHTML = originalText;
+                payBtn.disabled = false;
+            }
+        });
+    </script>
+    <script src="javascript/menu.js"></script>
+</body>
+</html>

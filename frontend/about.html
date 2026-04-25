@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddhi Enterprises | About Us</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="/Images/logo.png" alt="Samriddhi Logo">
+                <div class="logo-text">Samriddhi<span>Enterprises</span></div>
+            </div>
+            <div class="header-right">
+                <nav class="navbar">
+                    <a href="index.html">Home</a>
+                    <a href="service.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="appointment.html">Appointment</a>
+                    <a href="about.html" class="active">About</a>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-icon" id="profileIcon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" id="openSettings">
+                                <i class="fas fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" id="authLink" class="btn btn-primary btn-sm">Login</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="section-container" style="text-align: center; margin-bottom: 3rem;">
+        <h1 class="text-gradient" style="font-family: var(--font-heading); font-size: 3.5rem;">About Our Vision</h1>
+        <p class="text-muted" style="font-size: 1.1rem; max-width: 600px; margin: 1rem auto 0;">Bridging the gap between traditional banking and the underserved through innovation and trust.</p>
+    </section>
+
+    <!-- About Content -->
+    <section class="section-container">
+        <div class="glass-card">
+            <h2 class="card-title">About The Shop</h2>
+            <div class="card-content" style="font-size: 1.1rem; line-height: 1.8;">
+                <p class="mb-2">
+                    Samridhi Enterprises is a dedicated banking and financial service provider committed to making
+                    essential banking functions accessible to all, especially those facing challenges with traditional
+                    bank access. Founded and managed by <strong>Satyendra Kumar</strong>, Samridhi operates as a
+                    Customer Service Banking (CSB) center, meeting local banking needs with convenient, secure, and
+                    community-oriented services.
+                </p>
+                <p class="mb-2">
+                    Our mission is to bring vital financial services directly to people, making everyday banking
+                    accessible without the need for a bank branch visit. This includes the Aadhaar Enabled Payment
+                    System (AEPS), which allows customers to make transactions securely using their Aadhaar-linked bank
+                    accounts and fingerprint verification.
+                </p>
+                <p>
+                    We also offer credit card cash withdrawal and fingerprint-based systems, ensuring secure and
+                    convenient options for all customers. Satyendra Kumar and his team emphasize customer service,
+                    ensuring that each interaction is professional, friendly, and efficient.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section class="section-container">
+        <div class="grid-2">
+            <!-- Map Card -->
+            <div class="glass-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="card-title"><i class="fas fa-map-marker-alt text-gradient"></i> Our Location</h2>
+                <address class="card-content mb-2" style="font-style: normal;">
+                    Zeromile, Muzaffarpur<br>
+                    Bihar, India, 842004
+                </address>
+                <a href="https://www.google.com/maps/place/Samriddhi+Enterprises/@26.150101,85.3899301,244m/data=!3m1!1e3!4m6!3m5!1s0x39ed10841a568069:0xa4d38299903f2061!8m2!3d26.150013!4d85.3906429!16s%2Fg%2F11cs9_z0kf?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank" class="btn btn-outline" style="width: 100%;">
+                    <i class="fas fa-directions"></i> Get Directions
+                </a>
+                <div style="margin-top: 1.5rem; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                    <img src="/Images/location.png" alt="Map Location" style="width: 100%; display: block;">
+                </div>
+            </div>
+
+            <!-- Contact Options Card -->
+            <div class="glass-card">
+                <h2 class="card-title"><i class="fas fa-headset text-gradient"></i> Contact Us</h2>
+                <p class="card-content mb-2">Have questions? Reach out to us through any of these platforms. We're here to help!</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+                    <!-- Phone -->
+                    <a href="tel:+919386111191" class="contact-method">
+                        <div class="contact-icon phone"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-info">
+                            <span>Phone Call</span>
+                            <p>+91 9386111191</p>
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/919386111191" target="_blank" class="contact-method">
+                        <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-info">
+                            <span>WhatsApp</span>
+                            <p>Chat with us instantly</p>
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:Satya.mzp@gmail.com" class="contact-method">
+                        <div class="contact-icon mail"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <span>Email Address</span>
+                            <p>Satya.mzp@gmail.com</p>
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+919386111191"><i class="fas fa-phone"></i> +91 9386111191</a>
+                <a href="mailto:Satya.mzp@gmail.com"><i class="fas fa-envelope"></i> Satya.mzp@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Samridhi Enterprises | All Rights Reserved
+        </div>
+    </footer>
+
+    <!-- Profile Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSettings">&times;</span>
+            <h2 class="card-title">Profile Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="settingsUsername">Full Name</label>
+                    <input type="text" id="settingsUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="settingsDOB">Date of Birth</label>
+                    <input type="date" id="settingsDOB">
+                </div>
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--glass-border);">
+                <h3 class="card-title" style="font-size: 1.1rem;">Change Password</h3>
+                <div class="form-group">
+                    <label for="settingsOldPassword">Current Password</label>
+                    <input type="password" id="settingsOldPassword" placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="settingsNewPassword">New Password</label>
+                    <input type="password" id="settingsNewPassword" placeholder="Enter new password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="javascript/menu.js"></script>
+</body>
+
+</html>

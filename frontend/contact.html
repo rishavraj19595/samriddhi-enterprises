@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samridhi Enterprises | Contact Us</title>
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Contact Section Specific Styles */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #f1f5f9;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            color: #38bdf8;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .icon-circle {
+            background: #38bdf8;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+            font-family: var(--font-heading, sans-serif);
+        }
+
+        .card-text {
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-map {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-map:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border: none;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+
+        .btn-email {
+            background: rgba(14, 165, 233, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-email:hover {
+            background: rgba(14, 165, 233, 0.3);
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Samriddhi Enterprises</div>
+            <div class="header-right">
+                <nav class="navbar">
+                    <a href="index.html">Home</a>
+                    <a href="service.html">Services</a>
+                    <a href="products.html">Products</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="appointment.html">Book Appointment</a>
+                    <a href="about.html">About Us</a>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-icon" id="profileIcon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" id="openSettings">
+                                <i class="fas fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-item logout" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" id="authLink">Login</a>
+                </nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="section-container" style="text-align: center; margin-bottom: 1rem;">
+        <h1 class="text-gradient" style="font-family: var(--font-heading); font-size: 3.5rem;">Contact Us</h1>
+        <p class="text-muted" style="font-size: 1.2rem;">We are here to help. Reach out to us anytime.</p>
+    </section>
+
+    <!-- Contact Cards -->
+    <section class="contact-container" style="margin-bottom: 4rem;">
+        <div class="contact-grid">
+
+            <!-- Card 1: Visit Us -->
+            <div class="contact-card animate-in delay-1">
+                <div class="icon-circle">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="card-title">Visit Us</h3>
+                <p class="card-text">
+                    <strong>Office Address:</strong><br>
+                    H.No - 09, Prakash Path,<br>
+                    Ahiyapur Bhikhanpur,<br>
+                    Muzaffarpur, Bihar, 842004
+                </p>
+                <div style="margin: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <p class="card-text">
+                        <strong>Working Hours:</strong><br>
+                        9:00 AM – 6:00 PM<br>(Monday to Saturday)
+                    </p>
+                </div>
+                <a href="https://maps.google.com/?q=H.No+-+09,+Prakash+Path,+Ahiyapur+Bhikhanpur,+Muzaffarpur,+Bihar,+842004"
+                    target="_blank" class="action-btn btn-map">
+                    <i class="fas fa-map-marked-alt"></i> Get Directions
+                </a>
+            </div>
+
+            <!-- Card 2: Call Us -->
+            <div class="contact-card animate-in delay-2">
+                <div class="icon-circle">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3 class="card-title">Call Us</h3>
+                <p class="card-text">
+                    Need immediate assistance?<br>Give us a ring.
+                </p>
+                <p class="card-text" style="font-size: 1.2rem; color: #fff; margin: 1rem 0;">
+                    +91 93861 11191
+                </p>
+                <a href="https://wa.me/919386111191" target="_blank" class="action-btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+
+            <!-- Card 3: Email Us -->
+            <div class="contact-card animate-in delay-3">
+                <div class="icon-circle">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="card-title">Email Us</h3>
+                <p class="card-text">
+                    For support or inquiries,<br>drop us an email.
+                </p>
+                <div style="text-align: left; display: inline-block; margin-top: 0.5rem;">
+                    <p class="card-text">
+                        <i class="fas fa-headset" style="width: 20px; color: #38bdf8;"></i> movie128time@gmail.com
+                    </p>
+                    <p class="card-text">
+                        <i class="fas fa-briefcase" style="width: 20px; color: #38bdf8;"></i> Satya.mzp@gmail.com
+                    </p>
+                </div>
+                <br>
+                <a href="mailto:movie128time@gmail.com" class="action-btn btn-email">
+                    <i class="fas fa-paper-plane"></i> Send Email
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="service.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+919386111191"><i class="fas fa-phone"></i> +91 9386111191</a>
+                <a href="mailto:Satya.mzp@gmail.com"><i class="fas fa-envelope"></i> Satya.mzp@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Samridhi Enterprises | All Rights Reserved
+        </div>
+    </footer>
+
+    <!-- Profile Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSettings">&times;</span>
+            <h2 class="card-title">Profile Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="settingsUsername">Full Name</label>
+                    <input type="text" id="settingsUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="settingsDOB">Date of Birth</label>
+                    <input type="date" id="settingsDOB">
+                </div>
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--glass-border);">
+                <h3 class="card-title" style="font-size: 1.1rem;">Change Password</h3>
+                <div class="form-group">
+                    <label for="settingsOldPassword">Current Password</label>
+                    <input type="password" id="settingsOldPassword" placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="settingsNewPassword">New Password</label>
+                    <input type="password" id="settingsNewPassword" placeholder="Enter new password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="javascript/menu.js"></script>
+</body>
+
+</html>
