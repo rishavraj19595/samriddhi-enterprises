@@ -1,39 +1,8 @@
-[[redirects]]
-  from = "/login"
-  to = "/login.html"
-  status = 200
+[build]
+  publish = "."
+  base = "frontend"
 
 [[redirects]]
-  from = "/signup"
-  to = "/login.html"
-  status = 200
-
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
-
-[[redirects]]
-  from = "/service"
-  to = "/service.html"
-  status = 200
-
-[[redirects]]
-  from = "/products"
-  to = "/products.html"
-  status = 200
-
-[[redirects]]
-  from = "/feedback"
-  to = "/feedback.html"
-  status = 200
-
-[[redirects]]
-  from = "/appointment"
-  to = "/appointment.html"
-  status = 200
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
+  from = "/*"
+  to = "/index.html"
   status = 200
